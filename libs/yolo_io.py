@@ -6,7 +6,7 @@ import os
 from libs.constants import DEFAULT_ENCODING
 
 TXT_EXT = '.txt'
-ENCODE_METHOD = DEFAULT_ENCODING
+ENCODE_METHOD = "UTF-8"
 
 class YOLOWriter:
 
@@ -55,12 +55,12 @@ class YOLOWriter:
             out_file = open(
             self.filename + TXT_EXT, 'w', encoding=ENCODE_METHOD)
             classes_file = os.path.join(os.path.dirname(os.path.abspath(self.filename)), "classes.txt")
-            out_class_file = open(classes_file, 'w')
+            out_class_file = open(classes_file, 'w',encoding="UTF-8")
 
         else:
             out_file = codecs.open(target_file, 'w', encoding=ENCODE_METHOD)
             classes_file = os.path.join(os.path.dirname(os.path.abspath(target_file)), "classes.txt")
-            out_class_file = open(classes_file, 'w')
+            out_class_file = open(classes_file, 'w',encoding="UTF-8")
 
 
         for box in self.box_list:
@@ -94,7 +94,7 @@ class YoloReader:
 
         # print (file_path, self.class_list_path)
 
-        classes_file = open(self.class_list_path, 'r')
+        classes_file = open(self.class_list_path, 'r',encoding="UTF-8")
         self.classes = classes_file.read().strip('\n').split('\n')
 
         # print (self.classes)
