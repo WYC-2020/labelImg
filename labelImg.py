@@ -112,8 +112,8 @@ class MainWindow(QMainWindow, WindowMixin):
 
         if self.label_hist:
             self.default_label = self.label_hist[0]
-        else:
-            print("Not find:/data/predefined_classes.txt (optional)")
+        # else:
+        #     print("Not find:/data/predefined_classes.txt (optional)")
 
         # Main widgets and related state.
         self.label_dialog = LabelDialog(parent=self, list_item=self.label_hist)

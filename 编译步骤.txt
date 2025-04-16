@@ -1,0 +1,4 @@
+pip3 install pyinstaller pyqt5==5.15.6 lxml
+pyrcc5 -o libs/resources.py resources.qrc
+pyinstaller --hidden-import=pyqt5 --hidden-import=lxml -F -n "labelImg" -c labelImg.py -p ./libs -p ./  #官方打包，有黑窗口
+pyinstaller --noconsole --onefile labelImg.py 打包无黑窗口
