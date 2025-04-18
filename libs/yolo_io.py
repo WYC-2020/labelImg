@@ -93,9 +93,11 @@ class YoloReader:
             self.class_list_path = class_list_path
 
         # print (file_path, self.class_list_path)
-
-        classes_file = open(self.class_list_path, 'r',encoding="UTF-8")
-        self.classes = classes_file.read().strip('\n').split('\n')
+        if os.path.exists(self.class_list_path):
+            classes_file = open(self.class_list_path, 'r',encoding="UTF-8")
+            self.classes = classes_file.read().strip('\n').split('\n')
+        else:
+            self.classes = []
 
         # print (self.classes)
 
@@ -119,8 +121,11 @@ class YoloReader:
         self.shapes.append((label, points, None, None, difficult))
 
     def yolo_line_to_shape(self, class_index, x_center, y_center, w, h):
-        label = self.classes[int(class_index)]
-
+        if len(self.classes)<=0:
+            self.classes.append(class_index)
+            label=class_index
+        else:
+            label = self.classes[int(class_index)]
         x_min = max(float(x_center) - float(w) / 2, 0)
         x_max = min(float(x_center) + float(w) / 2, 1)
         y_min = max(float(y_center) - float(h) / 2, 0)
