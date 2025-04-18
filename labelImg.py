@@ -824,6 +824,10 @@ class MainWindow(QMainWindow, WindowMixin):
         for action in self.actions.onShapesPresent:
             action.setEnabled(True)
         self.update_combo_box()
+    def remove_all_label(self):
+        self.items_to_shapes.clear()
+        self.shapes_to_items.clear()
+        self.label_list.clear()
 
     def remove_label(self, shape):
         if shape is None:
@@ -860,7 +864,6 @@ class MainWindow(QMainWindow, WindowMixin):
                 shape.fill_color = QColor(*fill_color)
             else:
                 shape.fill_color = generate_color_by_text(label)
-
             self.add_label(shape)
         self.update_combo_box()
         self.canvas.load_shapes(s)
@@ -1306,6 +1309,9 @@ class MainWindow(QMainWindow, WindowMixin):
 
         if dir_path is not None and len(dir_path) > 1:
             self.default_save_dir = dir_path
+            classes_file = open(os.path.join(dir_path, "classes.txt"), 'r', encoding="UTF-8")
+            self.label_hist=classes_file.read().strip('\n').split('\n')
+            self.remove_all_label()
 
         self.show_bounding_box_from_annotation_file(self.file_path)
 
